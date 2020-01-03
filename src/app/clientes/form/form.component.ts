@@ -13,6 +13,7 @@ export class FormComponent implements OnInit {
 
   private cliente: Cliente = new Cliente();
   private titulo: string = "Crear Cliente";
+  private errores: string[];
 
   constructor(private  clienteService: ClienteService,
               private router: Router,
@@ -39,15 +40,26 @@ export class FormComponent implements OnInit {
       cliente => {
         this.router.navigate(['/clientes']);
         swal.fire('Nuevo cliente', `Cliente ${cliente.nombre} creado con exito`, 'success');
+      },
+      err => {
+        this.errores = err.error.errors as string[];
+        console.error('Codigo del error desde el backend ' + err.error.status);
+        console.error(err.error.errors)
       }
     )
   }
 
   update(): void {
     this.clienteService.update(this.cliente).subscribe(cliente => {
-      this.router.navigate(['/clientes']);
-      swal.fire('Cliente actualizado', `Cliente ${cliente.nombre} actualizado con exito`, 'success');
-    })
+        this.router.navigate(['/clientes']);
+        swal.fire('Cliente actualizado', `Cliente ${cliente.nombre} actualizado con exito`, 'success');
+      },
+      err => {
+        this.errores = err.error.errors as string[];
+        console.error('Codigo del error desde el backend ' + err.error.status);
+        console.error(err.error.errors)
+      }
+    )
   }
 
 
