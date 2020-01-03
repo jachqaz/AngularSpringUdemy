@@ -27,8 +27,11 @@ export class ClienteService {
         return clientes.map(cliente => {
           cliente.nombre = cliente.nombre.toUpperCase();
           // cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy','en-US');
-          let datePipe = new DatePipe('en-Us');
-          cliente.createAt = datePipe.transform(cliente.createAt, 'dd/MM/yyyy');
+          // registerLocaleData(localeEs,'es');
+          // let datePipe = new DatePipe('en-US');
+          let datePipe = new DatePipe('es');
+          cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');
+          // cliente.createAt = datePipe.transform(cliente.createAt, 'fullDate');
           return cliente
         })
       })

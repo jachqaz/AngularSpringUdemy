@@ -11,6 +11,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormComponent} from './clientes/form/form.component';
 import {FormsModule} from "@angular/forms";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import {registerLocaleData} from "@angular/common";
+import localeEs from '@angular/common/locales/es';
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/clientes', pathMatch: 'full'},
@@ -19,6 +22,8 @@ const routes: Routes = [
   {path: 'clientes/form', component: FormComponent},
   {path: 'clientes/form/:id', component: FormComponent},
 ];
+
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [
