@@ -30,7 +30,7 @@ export class ClienteService {
           // registerLocaleData(localeEs,'es');
           // let datePipe = new DatePipe('en-US');
           let datePipe = new DatePipe('es');
-          cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');
+          // cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');
           // cliente.createAt = datePipe.transform(cliente.createAt, 'fullDate');
           return cliente
         })

@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {registerLocaleData} from "@angular/common";
 import localeEs from '@angular/common/locales/es';
+import {ClienteService} from "./clientes/cliente.service";
 
 
 const routes: Routes = [
@@ -41,7 +42,7 @@ registerLocaleData(localeEs, 'es');
     FormsModule,
     SweetAlert2Module
   ],
-  providers: [],
+  providers: [ClienteService, {provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
