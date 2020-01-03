@@ -52,8 +52,8 @@ export class ClienteService {
   //   //   map(response => response as Cliente[])
   //   // );
   // }
+
   getClientes(page: number): Observable<any> {
-    // return of(CLIENTES)
     return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
       tap((response: any) => {
         console.log('ClienteService: tap 1');
@@ -75,9 +75,6 @@ export class ClienteService {
         })
       }),
     );
-    // return this.http.get(this.urlEndPoint,{headers: {'Access-Control-Allow-Origin': '*'}}).pipe(
-    //   map(response => response as Cliente[])
-    // );
   }
 
   create(cliente: Cliente): Observable<Cliente> {

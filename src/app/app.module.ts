@@ -14,6 +14,7 @@ import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {registerLocaleData} from "@angular/common";
 import localeEs from '@angular/common/locales/es';
 import {ClienteService} from "./clientes/cliente.service";
+import {PaginatorComponent} from './paginator/paginator.component';
 
 
 const routes: Routes = [
@@ -35,7 +36,8 @@ registerLocaleData(localeEs, 'es');
     FooterComponent,
     DirectivaComponent,
     ClientesComponent,
-    FormComponent
+    FormComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
