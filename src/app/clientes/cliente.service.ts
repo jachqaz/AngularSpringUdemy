@@ -1,17 +1,24 @@
 import {Injectable} from '@angular/core';
-import {CLIENTES} from "./clientes.json";
 import {Cliente} from "./cliente";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-  constructor() {
+  private urlEndPoint: string = 'http://localhost:8080/api/clientes';
+
+  // private headers: {'Access-Control-Allow-Origin': '*'};
+  constructor(private http: HttpClient) {
   }
 
-  getCLientes(): Observable<Cliente[]> {
-    return of(CLIENTES)
+  getClientes(): Observable<Cliente[]> {
+    // return of(CLIENTES)
+    return this.http.get<Cliente[]>(this.urlEndPoint);
+    // return this.http.get(this.urlEndPoint,{headers: {'Access-Control-Allow-Origin': '*'}}).pipe(
+    //   map(response => response as Cliente[])
+    // );
   }
 }
