@@ -18,33 +18,60 @@ export class ClienteService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  getClientes(): Observable<Cliente[]> {
+  // getClientes(): Observable<Cliente[]> {
+  //   // return of(CLIENTES)
+  //   return this.http.get<Cliente[]>(this.urlEndPoint).pipe(
+  //     tap(response => {
+  //       let clientes = response as Cliente[];
+  //       console.log('ClienteService: tap 1');
+  //       clientes.forEach(cliente => {
+  //         console.log(cliente)
+  //       })
+  //     }),
+  //     map(response => {
+  //       let clientes = response as Cliente[];
+  //       return clientes.map(cliente => {
+  //         cliente.nombre = cliente.nombre.toUpperCase();
+  //         // cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy','en-US');
+  //         // registerLocaleData(localeEs,'es');
+  //         // let datePipe = new DatePipe('en-US');
+  //         // let datePipe = new DatePipe('es');
+  //         // cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');
+  //         // cliente.createAt = datePipe.transform(cliente.createAt, 'fullDate');
+  //         return cliente
+  //       })
+  //     }),
+  //     tap(response => {
+  //       console.log('ClienteService: tap 2');
+  //       response.forEach(cliente => {
+  //         console.log(cliente)
+  //       })
+  //     }),
+  //   );
+  //   // return this.http.get(this.urlEndPoint,{headers: {'Access-Control-Allow-Origin': '*'}}).pipe(
+  //   //   map(response => response as Cliente[])
+  //   // );
+  // }
+  getClientes(page: number): Observable<any> {
     // return of(CLIENTES)
-    return this.http.get<Cliente[]>(this.urlEndPoint).pipe(
-      tap(response => {
-        let clientes = response as Cliente[];
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      tap((response: any) => {
         console.log('ClienteService: tap 1');
-        clientes.forEach(cliente => {
-          console.log(cliente)
+        (response.content as Cliente[]).forEach(cliente => {
+          console.log(cliente.nombre)
         })
       }),
-      map(response => {
-        let clientes = response as Cliente[];
-        return clientes.map(cliente => {
+      map((response: any) => {
+        (response.content as Cliente[]).map(cliente => {
           cliente.nombre = cliente.nombre.toUpperCase();
-          // cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy','en-US');
-          // registerLocaleData(localeEs,'es');
-          // let datePipe = new DatePipe('en-US');
-          // let datePipe = new DatePipe('es');
-          // cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');
-          // cliente.createAt = datePipe.transform(cliente.createAt, 'fullDate');
           return cliente
-        })
+        });
+        return response
       }),
       tap(response => {
         console.log('ClienteService: tap 2');
-        response.forEach(cliente => {
-          console.log(cliente)
+        (response.content as Cliente[]).forEach(cliente => {
+          console.log(cliente.nombre)
         })
       }),
     );
