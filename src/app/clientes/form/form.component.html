@@ -63,11 +63,12 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-form-label col-sm-2" for="region">Region</label>
+        <label class="col-form-label col-sm-2" for="region">Región</label>
         <div class="col-sm-6">
-          <select [(ngModel)]="cliente.region" class="form-control" id="region"
-                  name="createAt" style="display: inline; width: 300px">
-            <option *ngFor="let region of regiones" ngValue="region">{{region.nombre}}</option>
+          <select [(ngModel)]="cliente.region" [compareWith]="compararRegion" class="form-control" name="region"
+                  style="width:500px;">
+            <option [ngValue]="undefined">--- selecionar una región ---</option>
+            <option *ngFor="let region of regiones" [ngValue]="region">{{region.nombre}}</option>
           </select>
         </div>
       </div>
