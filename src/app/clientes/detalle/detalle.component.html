@@ -24,6 +24,11 @@
             </button>
           </div>
         </div>
+        <div *ngIf="progreso>0" class="progress">
+          <div [ngStyle]="{width: progreso+'%'}" aria-valuemax="100" aria-valuemin="0" attr.aria-valuenow="{{progreso}}"
+               class="progress-bar progress-bar-striped" role="progressbar">{{progreso}}%
+          </div>
+        </div>
         <div class="col-sm-2">
           <img *ngIf="cliente?.foto" alt="{{cliente.foto}}" class="img-thumbnail "
                src="http://localhost:8080/api/uploads/img/{{cliente.foto}}">
