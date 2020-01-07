@@ -3,11 +3,14 @@
   <div class="card-body">
     <div class="input-group">
       <div class="custom-file">
-        <input aria-describedby="inputGroupFileAddon04" class="custom-file-input" id="inputGroupFile04" type="file">
+        <input (change)="seleccionarFoto($event)" aria-describedby="inputGroupFileAddon04" class="custom-file-input"
+               id="inputGroupFile04" type="file">
         <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
       </div>
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" id="inputGroupFileAddon04" type="button">Button</button>
+        <button (click)="subirFoto()" class="btn btn-outline-secondary" id="inputGroupFileAddon04" type="button">
+          Button
+        </button>
       </div>
     </div>
   </div>
