@@ -54,10 +54,21 @@
       <div class="form-group row">
         <label class="col-form-label col-sm-2" for="createAt">Fecha</label>
         <div class="col-sm-6">
-          <input [(ngModel)]="cliente.createAt" [matDatepicker]="myDatepicker" class="form-control" id="createAt"
+          <input #createAt="ngModel" [(ngModel)]="cliente.createAt" [matDatepicker]="myDatepicker" class="form-control"
+                 id="createAt"
                  name="createAt" style="display: inline; width: 300px">
           <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-form-label col-sm-2" for="region">Region</label>
+        <div class="col-sm-6">
+          <select [(ngModel)]="cliente.region" class="form-control" id="region"
+                  name="createAt" style="display: inline; width: 300px">
+            <option *ngFor="let region of regiones" ngValue="region">{{region.nombre}}</option>
+          </select>
         </div>
       </div>
 
