@@ -1,14 +1,15 @@
-<div *ngIf="modalService.modal" class="modal" role="dialog" style="display: block" tabindex="-1">
-  <div class="modal-dialog-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{titulo}}</h5>
-        <button (click)="cerrarModal()" aria-label="Close" class="close" data-dismiss="modal" type="button">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container">
+<div *ngIf="modalService.modal" class="abrir-modal animacion fadeIn">
+  <div class="modal" role="dialog" style="display: block" tabindex="-1">
+    <div class="modal-dialog-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{titulo}}</h5>
+          <button (click)="cerrarModal()" aria-label="Close" class="close" data-dismiss="modal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
           <div class="row">
             <div class="col-sm">
               <ul *ngIf="cliente" class="list-group text-dark mb-3">
@@ -44,11 +45,12 @@
                    src="http://localhost:8080/api/uploads/img/{{cliente.foto}}">
             </div>
           </div>
-        </div>
+          </div>
 
-      </div>
-      <div class="modal-footer">
-        <button (click)="cerrarModal()" class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+        </div>
+        <div class="modal-footer">
+          <button (click)="cerrarModal()" class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+        </div>
       </div>
     </div>
   </div>
