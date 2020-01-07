@@ -30,19 +30,27 @@ export class ClientesComponent implements OnInit {
       }
       this.clienteService.getClientes(page)
         .pipe(tap(response => {
-            console.log('ClientesComponent: tap 3');
-            (response.content as Cliente[]).forEach(cliente => {
-              console.log(cliente.nombre)
-            })
-          }))
-          .subscribe(
-            response => {
-              this.clientes = (response.content as Cliente[]);
-              this.paginador = response;
-            }
-          )
+          console.log('ClientesComponent: tap 3');
+          (response.content as Cliente[]).forEach(cliente => {
+            console.log(cliente.nombre)
+          })
+        }))
+        .subscribe(
+          response => {
+            this.clientes = (response.content as Cliente[]);
+            this.paginador = response;
+          }
+        )
       }
-    )
+    );
+    this.modalService.notificarUpload.subscribe(cliente => {
+      this.clientes = this.clientes.map(clienteOriginal => {
+        if (cliente.id == clienteOriginal.id) {
+          clienteOriginal.foto = cliente.foto;
+        }
+        return clienteOriginal;
+      })
+    })
   }
 
   delete(cliente: Cliente): void {
