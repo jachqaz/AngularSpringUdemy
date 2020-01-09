@@ -5,7 +5,9 @@
     <h5 class="card-title">Listado de clientes</h5>
   </div>
   <div class="my-2 text-left">
-    <button [routerLink]="['/clientes/form']" class="btn btn-rounded btn-primary" type="submit">Crear Cliente</button>
+    <button *ngIf="authService.hasRole('ROLE_ADMIN')" [routerLink]="['/clientes/form']"
+            class="btn btn-rounded btn-primary" type="submit">Crear Cliente
+    </button>
   </div>
   <div *ngIf="clientes?.length==0" class="alert alert-info">
     No hay registros en la base de datos
@@ -13,18 +15,18 @@
   <table *ngIf="clientes?.length>0" class="table table-bordered table-striped">
     <thead>
     <tr>
-      <th>id</th>
+      <th *ngIf="authService.hasRole('ROLE_USER')">id</th>
       <th>nombre</th>
       <th>apellido</th>
       <th>createAt</th>
       <th>email</th>
-      <th>editar</th>
-      <th>eliminar</th>
+      <th *ngIf="authService.hasRole('ROLE_ADMIN')">editar</th>
+      <th *ngIf="authService.hasRole('ROLE_ADMIN')">eliminar</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let cliente of clientes">
-      <td>
+      <td *ngIf="authService.hasRole('ROLE_USER')">
         <img (click)="abriModal(cliente)" *ngIf="cliente?.foto" alt="{{cliente.foto}}" class="img-thumbnail "
              src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" style="width: 64px;cursor: pointer">
         <img (click)="abriModal(cliente)" *ngIf="!cliente?.foto" alt="Sin foto" class="img-thumbnail "
@@ -34,12 +36,12 @@
       <td>{{cliente.apellido | uppercase}}</td>
       <td>{{cliente.email}}</td>
       <td>{{cliente.createAt | date:"EEEE dd, MMMM yyyy"}}</td>
-      <td>
+      <td *ngIf="authService.hasRole('ROLE_ADMIN')">
         <button [routerLink]="['/clientes/form',cliente.id]" class="btn btn-primary" name="editar" type="button">
           editar
         </button>
       </td>
-      <td>
+      <td *ngIf="authService.hasRole('ROLE_ADMIN')">
         <button (click)="delete(cliente)" class="btn btn-danger btn-sm" name="eliminar" type="button">
           eliminar
         </button>

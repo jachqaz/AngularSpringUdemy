@@ -88,4 +88,11 @@ export class AuthService {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("usuario");
   }
+
+  hasRole(role: string): boolean {
+    if (this.usuario.roles.includes(role)) {
+      return true;
+    }
+    return false;
+  }
 }
