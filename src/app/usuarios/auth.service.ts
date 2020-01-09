@@ -16,7 +16,7 @@ export class AuthService {
     const credenciales = btoa('angularapp' + ':' + '12345');
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic' + credenciales
+      'Authorization': 'Basic ' + credenciales
     });
     let params = new URLSearchParams();
     params.set('grant_type', 'password');
