@@ -56,7 +56,7 @@ export class AuthService {
     this._usuario.nombre = payload.nombres;
     this._usuario.apellido = payload.apellido;
     this._usuario.email = payload.email;
-    this._usuario.username = payload.username;
+    this._usuario.username = payload.user_name;
     this._usuario.roles = payload.authorities;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
@@ -79,5 +79,13 @@ export class AuthService {
       return true
     }
     return false
+  }
+
+  logout() {
+    this._token = null;
+    this._usuario = null;
+    sessionStorage.clear();
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("usuario");
   }
 }
