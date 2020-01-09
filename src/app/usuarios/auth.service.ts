@@ -8,7 +8,31 @@ import {Usuario} from "./usuario";
 })
 export class AuthService {
 
+  private _usuario: Usuario;
+
+  public get usuario(): Usuario {
+    if (this._usuario != null) {
+      return this._usuario;
+    } else if (this._usuario == null && sessionStorage.getItem('usuario') != null) {
+      this._usuario = JSON.parse(sessionStorage.getItem('usuario')) as Usuario;
+      return this._usuario
+    }
+    return new Usuario();
+  }
+
   constructor(private http: HttpClient) {
+  }
+
+  private _token: string;
+
+  public get token(): string {
+    if (this._token != null) {
+      return this._token;
+    } else if (this._token == null && sessionStorage.getItem('token') != null) {
+      this._token = sessionStorage.getItem('token');
+      return this._token
+    }
+    return null;
   }
 
   login(usuario: Usuario): Observable<any> {
@@ -24,5 +48,28 @@ export class AuthService {
     params.set('password', usuario.password);
     console.log(params.toString());
     return this.http.post<any>(urlEndpoint, params.toString(), {headers: httpHeaders});
+  }
+
+  guardarUsuario(access_token: string) {
+    let payload = this.obtenerDatosToken(access_token);
+    this._usuario = new Usuario();
+    this._usuario.nombre = payload.nombres;
+    this._usuario.apellido = payload.apellido;
+    this._usuario.email = payload.email;
+    this._usuario.username = payload.username;
+    this._usuario.roles = payload.authorities;
+    sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
+  }
+
+  guardarToken(access_token: string) {
+    this._token = access_token;
+    sessionStorage.setItem('token', access_token)
+  }
+
+  obtenerDatosToken(accessToken: string): any {
+    if (accessToken != null) {
+      return JSON.parse(atob(accessToken.split('.')[1]));
+    }
+    return null;
   }
 }
