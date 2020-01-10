@@ -17,4 +17,8 @@ export class FacturaService {
     return this.http.get<Factura>(`${this.urlEndpoint}/${id}`)
   }
 
+  delete(id: number): Observable<Factura> {
+    return this.http.delete<Factura>(`${this.urlEndpoint}/${id}`)
+  }
+
 }
