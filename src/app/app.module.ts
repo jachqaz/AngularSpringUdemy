@@ -25,6 +25,7 @@ import {RoleGuard} from "./usuarios/guards/role.guard";
 import {TokenInterceptor} from "./usuarios/interceptors/token.interceptor";
 import {AuthInterceptor} from "./usuarios/interceptors/auth.interceptor";
 import {DetalleFacturaComponent} from './facturas/detalle-factura.component';
+import {FacturasComponent} from './facturas/facturas/facturas.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path: 'clientes/page/:page', component: ClientesComponent},
   {path: 'login', component: LoginComponent},
   {path: 'facturas/:id', component: DetalleFacturaComponent},
+  {path: 'facturas/form/:clienteId', component: FacturasComponent},
   // {path: 'clientes/ver/:id', component: DetalleComponent},
 ];
 
@@ -57,7 +59,8 @@ registerLocaleData(localeEs, 'es');
     PaginatorComponent,
     DetalleComponent,
     LoginComponent,
-    DetalleFacturaComponent
+    DetalleFacturaComponent,
+    FacturasComponent
   ],
   imports: [
     BrowserModule,

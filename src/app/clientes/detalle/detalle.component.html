@@ -47,6 +47,10 @@
             </div>
           </div>
             <div class="row">
+              <button [routerLink]="['/facturas/form',cliente.id]" class="btn btn-success" type="button">Crear factura
+              </button>
+            </div>
+            <div class="row">
               <div *ngIf="cliente.facturas.length==0" class="alert alert-info my-4">
                 No hay facturas asignadas para el cliente {{cliente.nombre}} {{cliente.apellido}}
               </div>
