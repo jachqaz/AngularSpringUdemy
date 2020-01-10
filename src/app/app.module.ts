@@ -9,7 +9,7 @@ import {ClientesComponent} from './clientes/clientes.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormComponent} from './clientes/form/form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {registerLocaleData} from "@angular/common";
 import localeEs from '@angular/common/locales/es';
@@ -26,6 +26,8 @@ import {TokenInterceptor} from "./usuarios/interceptors/token.interceptor";
 import {AuthInterceptor} from "./usuarios/interceptors/auth.interceptor";
 import {DetalleFacturaComponent} from './facturas/detalle-factura.component';
 import {FacturasComponent} from './facturas/facturas/facturas.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 const routes: Routes = [
@@ -70,7 +72,10 @@ registerLocaleData(localeEs, 'es');
     SweetAlert2Module,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [ClienteService, {provide: LOCALE_ID, useValue: 'es'},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
