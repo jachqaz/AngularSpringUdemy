@@ -39,7 +39,10 @@
           </mat-form-field>
         </div>
       </div>
-      <table class="table table-striped table-hover table-sm">
+      <div *ngIf="factura.items.length==0" class="alert alert-info my-4">
+        No hay lineas asignadas para el factura. Debe agregar al menos una
+      </div>
+      <table *ngIf="factura.items.length>0" class="table table-striped table-hover table-sm">
         <thead>
         <tr>
           <th>Productos</th>
@@ -63,6 +66,8 @@
         </tr>
         </tbody>
       </table>
+      <h5 *ngIf="factura.items.length>0" class="float-right">Gran Total: <span
+        class="badge badge-secondary">{{factura.calcularGranTotal()}}</span></h5>
       <div class="form-group row">
         <div class="col-sm-6">
           <input class="btn btn-secondary" type="submit" value="Crear Factura">
