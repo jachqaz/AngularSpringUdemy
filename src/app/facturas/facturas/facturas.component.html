@@ -30,7 +30,8 @@
           <mat-form-field>
             <input [formControl]="autoCompleteControl" [matAutocomplete]="auto" aria-label="Productos" matInput
                    placeholder="Añadir producto" type="text">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombre">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="seleccionarProducto($event)"
+                              [displayWith]="mostrarNombre">
               <mat-option *ngFor="let producto of productosFiltrados | async" [value]="producto">
                 {{producto.nombre}}
               </mat-option>
@@ -38,6 +39,24 @@
           </mat-form-field>
         </div>
       </div>
+      <table class="table table-striped table-hover table-sm">
+        <thead>
+        <tr>
+          <th>Productos</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of factura.items">
+          <td>{{item.producto.nombre}}</td>
+          <td>{{item.producto.precio}}</td>
+          <td>{{item.cantidad}}</td>
+          <td>{{item.calcularImporte()}}</td>
+        </tr>
+        </tbody>
+      </table>
       <div class="form-group row">
         <div class="col-sm-6">
           <input class="btn btn-secondary" type="submit" value="Crear Factura">
