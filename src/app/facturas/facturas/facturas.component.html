@@ -70,7 +70,7 @@
         class="badge badge-secondary">{{factura.calcularGranTotal()}}</span></h5>
       <div class="form-group row">
         <div class="col-sm-6">
-          <input class="btn btn-secondary" type="submit" value="Crear Factura">
+          <input (click)="create()" class="btn btn-secondary" type="submit" value="Crear Factura">
         </div>
       </div>
     </form>
