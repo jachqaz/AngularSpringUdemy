@@ -28,6 +28,7 @@ import {DetalleFacturaComponent} from './facturas/detalle-factura.component';
 import {FacturasComponent} from './facturas/facturas/facturas.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatInputModule} from "@angular/material/input";
 
 
 const routes: Routes = [
@@ -75,7 +76,8 @@ registerLocaleData(localeEs, 'es');
     MatMomentDateModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [ClienteService, {provide: LOCALE_ID, useValue: 'es'},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
