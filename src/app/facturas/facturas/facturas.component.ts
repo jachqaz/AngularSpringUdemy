@@ -3,7 +3,7 @@ import {Factura} from "../models/factura";
 import {ClienteService} from "../../clientes/cliente.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {FormControl} from "@angular/forms";
+import {FormControl, NgForm} from "@angular/forms";
 import {flatMap, map} from "rxjs/operators";
 import {FacturaService} from "../services/factura.service";
 import {Producto} from "../models/producto";
@@ -112,12 +112,17 @@ export class FacturasComponent implements OnInit {
     this.factura.items = this.factura.items.filter((item: ItemFactura) => id !== item.producto.id);
   }
 
-  create() {
+  create(facturaForm: NgForm) {
     console.log(this.factura);
-    this.facturaService.create(this.factura).subscribe(factura => {
-      Swal.fire(this.titulo, `Factura ${factura.descripcion} creada con exito`, 'success');
-      this.router.navigate(['/clientes'])
-    })
+    if (this.factura.items.length == 0) {
+      this.autoCompleteControl.setErrors({'invalid': true});
+    }
+    if (facturaForm.form.valid && this.factura.items.length > 0) {
+      this.facturaService.create(this.factura).subscribe(factura => {
+        Swal.fire(this.titulo, `Factura ${factura.descripcion} creada con exito`, 'success');
+        this.router.navigate(['/clientes'])
+      })
+    }
   }
 }
 

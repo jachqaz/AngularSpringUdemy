@@ -4,7 +4,7 @@
     <h4 class="cars-title">
       <a [routerLink]="['/clientes']" class="btn btn-light btn-xs"></a>
     </h4>
-    <form>
+    <form #facturaForm="ngForm">
       <div *ngIf="factura.cliente" class="form-group row">
         <label class="col-sm-2 col-form-label" for="cliente">Cliente</label>
         <div class="col-sm-6">
@@ -15,7 +15,12 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="descripcion">Descripcion</label>
         <div class="col-sm-6">
-          <input [(ngModel)]="factura.descripcion" class="form-control" id="descripcion" name="descripcion" type="text">
+          <input #descripcion="ngModel" [(ngModel)]="factura.descripcion" class="form-control" id="descripcion"
+                 name="descripcion" required type="text">
+          <div *ngIf="descripcion.invalid && descripcion.touched || descripcion.invalid && facturaForm.submitted"
+               class="alert alert-danger">
+            La descripcion es requerida
+          </div>
         </div>
       </div>
       <div class="form-group row">
@@ -37,6 +42,9 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+          <div *ngIf="autoCompleteControl.invalid && facturaForm.submitted" class="alert alert-danger">
+            La factura no puede no tener lineas
+          </div>
         </div>
       </div>
       <div *ngIf="factura.items.length==0" class="alert alert-info my-4">
@@ -70,7 +78,8 @@
         class="badge badge-secondary">{{factura.calcularGranTotal()}}</span></h5>
       <div class="form-group row">
         <div class="col-sm-6">
-          <input (click)="create()" class="btn btn-secondary" type="submit" value="Crear Factura">
+          <!--          <input (click)="create()" class="btn btn-secondary" type="submit" value="Crear Factura" [disabled]="facturaForm.form.invalid ||factura.items==0">-->
+          <input (click)="create(facturaForm)" class="btn btn-secondary" type="submit" value="Crear Factura">
         </div>
       </div>
     </form>
